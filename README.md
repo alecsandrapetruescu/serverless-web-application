@@ -4,10 +4,10 @@
 
 
 #### Resources
-[Building a Serverless application](https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/)
-[Serverless patterns](https://serverlessland.com/patterns)
+- [Building a Serverless application](https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/)
+- [Building a serverless contact form with AWS Lambda and AWS SES](https://awstip.com/building-a-serverless-contact-form-with-aws-lambda-and-aws-ses-6c07de5323)
+- [Serverless patterns](https://serverlessland.com/patterns)
 
 #### Requirements
-Install AWS cli. 
-
-[How to install AWS cli on Ubuntu 20.x.](https://gist.github.com/alecsandrapetruescu/78a17b5c2e530787fea25814f6ccbc53)
+- Install AWS cli. 
+- [How to install AWS cli on Ubuntu 20.x.](https://gist.github.com/alecsandrapetruescu/78a17b5c2e530787fea25814f6ccbc53)
