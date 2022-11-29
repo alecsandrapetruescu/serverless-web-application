@@ -1,4 +1,4 @@
-# serverless
+## AWS Serverless web application
 
 #### A high level overview of the services.
 
