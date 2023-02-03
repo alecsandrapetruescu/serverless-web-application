@@ -2,7 +2,7 @@
 
 #### A high level overview of the services.
 
-
+![serverless-web-application-web-form-services.jpg](serverless-web-application-web-form-services.jpg)
 #### Resources
 - [Building a Serverless application](https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/)
 - [Building a serverless contact form with AWS Lambda and AWS SES](https://awstip.com/building-a-serverless-contact-form-with-aws-lambda-and-aws-ses-6c07de5323)
