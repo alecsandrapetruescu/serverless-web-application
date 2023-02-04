@@ -12,7 +12,8 @@
 #### Requirements
 - Install AWS cli. 
 - [How to install AWS cli on Ubuntu 20.x.](https://gist.github.com/alecsandrapetruescu/78a17b5c2e530787fea25814f6ccbc53)
-
+- Install [Node.js version 18.x](https://gist.github.com/alecsandrapetruescu/9e5d1b02f2a9644b14257c101c8dd332)
+- Install `cdk`: `npm install -g aws-cdk-lib`
 #### Serverless Land used patterns
 - [API Gateway REST API to Lambda to DynamoDB with X-Ray](https://serverlessland.com/patterns/apigw-lambda-dynamodb-xray-cdk)
 - [DynamoDB to Lambda](https://serverlessland.com/patterns/dynamodb-lambda-cdk)
