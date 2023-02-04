@@ -37,4 +37,3 @@ exports.handler = async (event:APIGatewayProxyEvent) => {
     return { statusCode: 500 }
   }
 }
-
