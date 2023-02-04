@@ -22,3 +22,6 @@
 - [API Gateway REST API to Lambda to DynamoDB with X-Ray](https://serverlessland.com/patterns/apigw-lambda-dynamodb-xray-cdk)
 - [DynamoDB to Lambda](https://serverlessland.com/patterns/dynamodb-lambda-cdk)
 
+
+----
+Copyright (c) 2023
