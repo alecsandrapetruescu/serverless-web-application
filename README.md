@@ -40,8 +40,7 @@
     ```
     cdk deploy
     ```
-   Once deployment completes, the REST API endpoint will be seen as an output. 
-You will use this URL for testing/ making GET request.
+   Once deployment completes, the REST API endpoint will be seen as an output.
 
 
 #### How it works
