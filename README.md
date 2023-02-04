@@ -64,15 +64,14 @@ You can view the X-Ray service map in the Amazon Cloudwatch console.
     # example
     curl -X POST https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/contact \
    -H "Content-Type: application/json" \
-   -d '{"id": 79, "message": "your message"}'  
+   -d '{"message": "your message"}'  
     ```
-3. You will receive a response as follows because there is currently no items in the Dynamodb table:
+3. You will receive a response as follows:
     ```
-    {"Items":[],"Count":0,"ScannedCount":0}
+    {}
     ```
-4. Now, you can navigate to the [Amazon Cloudwatch console](https://console.aws.amazon.com/cloudwatch). Under **X-Ray traces**, you will see the service map that shows the entire journey of the GET request.
-
-   <img src="./docs/xray-service-map.png" alt="xray-service-map" width="90%"/>
+4. Now, you can navigate to the [Amazon Cloudwatch console](https://console.aws.amazon.com/cloudwatch). 
+5. Under **X-Ray traces**, you will see the service map that shows the entire journey of the POST request.
 
 #### Cleanup
 
