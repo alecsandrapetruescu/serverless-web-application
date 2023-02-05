@@ -45,8 +45,10 @@
 
 #### How it works
 
-This CDK application deploys an Amazon API Gateway REST API that uses a Lambda function as the backend integration to scan a Dynamodb table. 
-The REST API and Lambda function both have X-Ray tracing enabled. 
+This CDK application deploys an Amazon API Gateway REST API that uses a Lambda function as the backend integration to 
+insert in a Dynamodb table. 
+The Dynamodb table has streams enabled and a trigger for a Lambda function.
+The REST API and Lambda functions have X-Ray tracing enabled. 
 X-Ray SDK is also integrated in the Lambda function to observe into the API call to the downstream Dynamodb table. 
 You can view the X-Ray service map in the Amazon Cloudwatch console.
 
