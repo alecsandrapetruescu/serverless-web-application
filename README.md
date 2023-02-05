@@ -1,4 +1,5 @@
 ## AWS Serverless web application
+[![Node.js CI [18.x]](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/node.js.yml/badge.svg)](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/node.js.yml)
 
 #### A high level overview of the services.
 
