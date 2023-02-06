@@ -5,6 +5,9 @@ import {BillingMode, StreamViewType} from 'aws-cdk-lib/aws-dynamodb'
 import * as apigateway from 'aws-cdk-lib/aws-apigateway'
 import * as lambda from 'aws-cdk-lib/aws-lambda'
 import {DynamoEventSource} from "aws-cdk-lib/aws-lambda-event-sources";
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as ses from 'aws-cdk-lib/aws-ses';
+import { SES_EMAIL_IDENTITY } from '../env';
 
 export class SwaStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -41,6 +44,10 @@ export class SwaStack extends Stack {
         const endpoint = api.root.addResource("contact")
         const endpointMethod = endpoint.addMethod("POST", new apigateway.LambdaIntegration(lambdaApiGateway))
 
+        const identity = new ses.EmailIdentity(this, 'Identity', {
+            identity: ses.Identity.email(SES_EMAIL_IDENTITY)
+        });
+
         // Lambda Function to read from Stream
         const lambdaReadStream = new lambda.Function(this, "readStream", {
             runtime: lambda.Runtime.NODEJS_14_X,
@@ -48,7 +55,9 @@ export class SwaStack extends Stack {
             code: lambda.Code.fromAsset("src/form-table-trigger"),
             tracing: lambda.Tracing.ACTIVE,
             environment: {
-                DYNAMODB: dynamodbTable.tableName
+                DYNAMODB: dynamodbTable.tableName,
+                VERIFIED_EMAIL: SES_EMAIL_IDENTITY,
+                REGION: identity.env.region
             },
         })
 
@@ -62,7 +71,15 @@ export class SwaStack extends Stack {
             retryAttempts: 0
         }))
 
+        lambdaReadStream.addToRolePolicy(new iam.PolicyStatement({
+            effect: iam.Effect.ALLOW,
+            actions: ['ses:SendEmail', 'ses:SendRawEmail', 'ses:SendTemplatedEmail'],
+            resources: ['*']
+        }))
+
+
         // Outputs
+        new CfnOutput(this, 'SESEmailIdentity', {value: identity.emailIdentityName});
         new CfnOutput(this, 'DynamoDbTableName', {value: dynamodbTable.tableName});
         new CfnOutput(this, 'ApiGatewayLambdaFunctionArn', {value: lambdaApiGateway.functionArn});
         new CfnOutput(this, 'LambdaDynamodbFunctionArn', {value: lambdaReadStream.functionArn});
