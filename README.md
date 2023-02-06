@@ -9,7 +9,7 @@
 - [Git](https://gist.github.com/alecsandrapetruescu/5aa99039842186ea8864d9ac10f73553)
 - [AWS CLI](https://gist.github.com/alecsandrapetruescu/78a17b5c2e530787fea25814f6ccbc53)
 - [Node.js version 18.x](https://gist.github.com/alecsandrapetruescu/9e5d1b02f2a9644b14257c101c8dd332)
-- `cdk`: `npm install -g aws-cdk-lib`
+- `cdk`: `npm install -g aws-cdk`
 
 ### Deployment Instructions
 
