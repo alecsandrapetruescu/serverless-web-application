@@ -22,7 +22,7 @@ export class SwaStack extends Stack {
         )
 
         const lambdaApiGateway = new lambda.Function(this, "lambdaFunction", {
-            runtime: lambda.Runtime.NODEJS_14_X,
+            runtime: lambda.Runtime.NODEJS_18_X,
             handler: "index.handler",
             code: lambda.Code.fromAsset("src/form-endpoint"),
             tracing: lambda.Tracing.ACTIVE,
@@ -50,7 +50,7 @@ export class SwaStack extends Stack {
 
         // Lambda Function to read from Stream
         const lambdaReadStream = new lambda.Function(this, "readStream", {
-            runtime: lambda.Runtime.NODEJS_14_X,
+            runtime: lambda.Runtime.NODEJS_18_X,
             handler: "handler.handler",
             code: lambda.Code.fromAsset("src/form-table-trigger"),
             tracing: lambda.Tracing.ACTIVE,
