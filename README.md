@@ -1,6 +1,6 @@
 ## AWS Serverless web application
 [![Node.js CI [18.x]](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/node.js.yml/badge.svg)](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/node.js.yml)
-
+[![CodeQL](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/codeql.yml/badge.svg)](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/codeql.yml)
 #### A high level overview of the services.
 
 ![serverless-web-application-web-form-services.jpg](serverless-web-application-web-form-services.jpg)
