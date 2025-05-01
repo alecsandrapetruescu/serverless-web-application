@@ -5,13 +5,13 @@
     "devDependencies": {
         "aws-lambda": "^1.0.7",
         "aws-sdk": "latest",
-        "@types/aws-lambda": "^8.10.110",
-        "@types/uuid": "^9.0.0"
+        "@types/aws-lambda": "^8.10.149",
+        "@types/uuid": "^10.0.0"
     },
     "dependencies": {
-        "aws-xray-sdk": "^3.4.1",
-        "aws-xray-sdk-core": "^3.4.1",
-        "moment": "^2.29.4",
-        "uuid": "^9.0.0"
+        "aws-xray-sdk": "^3.10.3",
+        "aws-xray-sdk-core": "^3.10.3",
+        "moment": "^2.30.1",
+        "uuid": "^11.1.0"
     }
 }
