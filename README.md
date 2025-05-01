@@ -8,6 +8,7 @@
 - [AWS account](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html)
 - [Git](https://gist.github.com/alecsandrapetruescu/5aa99039842186ea8864d9ac10f73553)
 - [AWS CLI](https://gist.github.com/alecsandrapetruescu/78a17b5c2e530787fea25814f6ccbc53)
+- [Configure AWS CLI](README_AWSCLI_CONFIGURATION.md)
 - [Node.js version 18.x](https://gist.github.com/alecsandrapetruescu/9e5d1b02f2a9644b14257c101c8dd332)
 - `cdk`: `npm install -g aws-cdk`
 - `AWS SES` uses an email address as identity, hardcoded in [env.ts](./cdk/env.ts)
@@ -35,6 +36,14 @@ export const SES_EMAIL_IDENTITY = "Please fill in your email to be used for crea
     ```
     aws sts get-caller-identity
     ```
+   * Response will look like:
+   ```
+   {
+    "UserId": "...",
+    "Account": "...", // <- should be copied for step 5.
+    "Arn": "..."
+   }
+   ```
 5. In case CDK is used to deploy to your AWS account, you will have to bootstrap your account for the first deployment.
     ```
     cdk bootstrap <account-number>/<region>
@@ -48,7 +57,8 @@ export const SES_EMAIL_IDENTITY = "Please fill in your email to be used for crea
     cdk deploy
     ```
    Once deployment completes, the REST API endpoint will be seen as an output.
-
+7. You will receive an email from AWS with subject containing `Email Address Verification Request`, you will need to
+confirm that you are authorizing the email address.
 
 #### How it works
 
@@ -68,7 +78,7 @@ You can view the X-Ray service map in the Amazon Cloudwatch console.
     ```
     SwaStack.RestAPIEndpointB14C3C54 = https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/
     ```
-2. To make the GET request to scan your Dynamodb table, run:
+2. To make the POST request to submit to Dynamodb table and SES, run:
     ```
     curl <your-restapi-endpoint-url>/contact
     # example
