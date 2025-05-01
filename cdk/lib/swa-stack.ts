@@ -83,5 +83,7 @@ export class SwaStack extends Stack {
         new CfnOutput(this, 'DynamoDbTableName', {value: dynamodbTable.tableName});
         new CfnOutput(this, 'ApiGatewayLambdaFunctionArn', {value: lambdaApiGateway.functionArn});
         new CfnOutput(this, 'LambdaDynamodbFunctionArn', {value: lambdaReadStream.functionArn});
+        new CfnOutput(this, "ApiUrlOutput", {value: api.url});
+        new CfnOutput(this, "EndpointOutput", {value: api.url + endpoint.path.replace("/", "")});
     }
 }

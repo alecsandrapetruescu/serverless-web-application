@@ -76,11 +76,11 @@ You can view the X-Ray service map in the Amazon Cloudwatch console.
 
 1. Retrieve the API Gateway URL from the `cdk deploy` output. It should look something like this
     ```
-    SwaStack.RestAPIEndpointB14C3C54 = https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/
+    SwaStack.EndpointOutput = https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/contact
     ```
 2. To make the POST request to submit to Dynamodb table and SES, run:
     ```
-    curl <your-restapi-endpoint-url>/contact
+    curl <your-restapi-endpoint>
     # example
     curl -X POST https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/contact \
    -H "Content-Type: application/json" \
