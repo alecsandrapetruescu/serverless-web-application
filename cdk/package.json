@@ -7,6 +7,7 @@
   "scripts": {
     "prebuild": "npm install && cd src/form-endpoint && npm i && tsc && cd ../../ && cd src/form-table-trigger && npm i",
     "build": "tsc",
+    "buildUi": "cd src/ui && npm install && npm run build",
     "watch": "tsc -w",
     "cdk": "cdk"
   },

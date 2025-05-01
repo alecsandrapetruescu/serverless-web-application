@@ -32,7 +32,11 @@ export const SES_EMAIL_IDENTITY = "Please fill in your email to be used for crea
     ```
     npm run prebuild
     ```
-4. Configure your AWS CLI to point to the AWS account and region where you want to deploy. You can run the following command to verify which AWS account you are currently logged on:
+4. Run build steps for React app
+    ```
+    npm run buildUi
+    ```
+5. Configure your AWS CLI to point to the AWS account and region where you want to deploy. You can run the following command to verify which AWS account you are currently logged on:
     ```
     aws sts get-caller-identity
     ```
@@ -44,7 +48,7 @@ export const SES_EMAIL_IDENTITY = "Please fill in your email to be used for crea
     "Arn": "..."
    }
    ```
-5. In case CDK is used to deploy to your AWS account, you will have to bootstrap your account for the first deployment.
+6. In case CDK is used to deploy to your AWS account, you will have to bootstrap your account for the first deployment.
     ```
     cdk bootstrap <account-number>/<region>
     ```
@@ -52,12 +56,12 @@ export const SES_EMAIL_IDENTITY = "Please fill in your email to be used for crea
     ```
     cdk bootstrap aws://<account-number>/<region>
     ```
-6. Deploy the stack
+7. Deploy the stack
     ```
     cdk deploy
     ```
    Once deployment completes, the REST API endpoint will be seen as an output.
-7. You will receive an email from AWS with subject containing `Email Address Verification Request`, you will need to
+8. You will receive an email from AWS with subject containing `Email Address Verification Request`, you will need to
 confirm that you are authorizing the email address.
 
 #### How it works
@@ -70,11 +74,11 @@ insert in a Dynamodb table.
 * The REST API and Lambda functions have X-Ray tracing enabled. 
 X-Ray SDK is also integrated in the Lambda function to observe into the API call to the downstream Dynamodb table. 
 You can view the X-Ray service map in the Amazon Cloudwatch console.
-
+* React app to S3 configured with CloudFront
 
 #### Testing
 
-1. Retrieve the API Gateway URL from the `cdk deploy` output. It should look something like this
+1. Retrieve from the `cdk deploy` `Outputs` the API Gateway URL. It should look something like this
     ```
     SwaStack.EndpointOutput = https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/contact
     ```
@@ -94,6 +98,10 @@ You can view the X-Ray service map in the Amazon Cloudwatch console.
 4. An email will be sent to the above `emailTo` 
 5. Navigate to the [Amazon Cloudwatch console](https://console.aws.amazon.com/cloudwatch). 
 6. Under **X-Ray traces**, you will see the service map that shows the entire journey of the request.
+7. Retrieve from the `cdk deploy` `Outputs` the CloudFront URL, It should look something like this:
+   ```
+   SwaStack.CloudFrontURL = d3vrkgdyt1yawd.cloudfront.net
+   ```
 
 #### Cleanup
 
@@ -112,10 +120,13 @@ cdk destroy
 - [Least deployment privilege with CDK Bootstrap](https://betterdev.blog/cdk-bootstrap-least-deployment-privilege/)
 - [How do I send email using Lambda and Amazon SES?](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-send-email-ses/)
 - [How to send emails with SES in AWS CDK](https://bobbyhadz.com/blog/aws-ses-send-emails)
+- [Deploy a React App with the AWS CDK](https://andrewevans.dev/blog/2023-02-21-deploy-a-react-app-with-the-aws-cdk/)
+- [How to Deploy a React App with AWS CDK in S3](https://aws.plainenglish.io/how-to-deploy-a-react-app-with-aws-cdk-in-s3-aa9f8cb0e4a3)
+- [Deploy your static React app to AWS CloudFront using CDK](https://paulallies.medium.com/deploy-your-static-react-app-to-aws-cloudfront-using-cdk-e53287e0052e)
 #### Serverless Land used patterns
 - [API Gateway REST API to Lambda to DynamoDB with X-Ray](https://serverlessland.com/patterns/apigw-lambda-dynamodb-xray-cdk)
 - [DynamoDB to Lambda](https://serverlessland.com/patterns/dynamodb-lambda-cdk)
 
 
 ----
-Copyright (c) 2023
+Copyright (c) 2025

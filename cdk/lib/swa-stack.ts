@@ -1,4 +1,4 @@
-import {CfnOutput, RemovalPolicy, Stack, StackProps} from 'aws-cdk-lib';
+import {CfnOutput, RemovalPolicy, Size, Stack, StackProps} from 'aws-cdk-lib';
 import {Construct} from 'constructs';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb'
 import {BillingMode, StreamViewType} from 'aws-cdk-lib/aws-dynamodb'
@@ -8,6 +8,11 @@ import {DynamoEventSource} from "aws-cdk-lib/aws-lambda-event-sources";
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as ses from 'aws-cdk-lib/aws-ses';
 import { SES_EMAIL_IDENTITY } from '../env';
+import {BlockPublicAccess, Bucket} from "aws-cdk-lib/aws-s3";
+import {Distribution, S3OriginAccessControl, Signing, ViewerProtocolPolicy} from "aws-cdk-lib/aws-cloudfront";
+import {S3BucketOrigin} from "aws-cdk-lib/aws-cloudfront-origins";
+import {BucketDeployment, Source} from "aws-cdk-lib/aws-s3-deployment";
+import path = require("path");
 
 export class SwaStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -77,6 +82,47 @@ export class SwaStack extends Stack {
             resources: ['*']
         }))
 
+        const frontendBucket = new Bucket(this, 'FrontendBucket', {
+            publicReadAccess: true, // Allows public access for static website
+            blockPublicAccess: BlockPublicAccess.BLOCK_ACLS, // Allow public access through bucket policies
+            removalPolicy: RemovalPolicy.DESTROY, // Use RemovalPolicy.RETAIN in production
+            autoDeleteObjects: true, // Remove this in production
+        });
+
+        // Create the Origin Access Control (OAC)
+        const originAccessControl = new S3OriginAccessControl(this, 'MyOAC', {
+            signing: Signing.SIGV4_NO_OVERRIDE
+        });
+
+        // Get the S3 bucket and OAC from the S3 Bucket stack
+        const s3Origin = S3BucketOrigin.withOriginAccessControl(frontendBucket, {
+            originAccessControl
+        });
+
+        const distribution = new Distribution(this, 'CloudfrontDistribution', {
+            defaultBehavior: {
+                origin: s3Origin,
+                viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+            },
+            defaultRootObject: 'index.html',
+            errorResponses: [
+                {
+                    httpStatus: 404,
+                    responseHttpStatus: 200,
+                    responsePagePath: '/index.html',
+                },
+            ],
+        });
+
+        new BucketDeployment(this, 'BucketDeployment', {
+            sources: [Source.asset(path.join(__dirname, '..','/src/ui/dist'))],
+            destinationBucket: frontendBucket,
+            distribution,
+            distributionPaths: ['/*'],
+            memoryLimit: 2048,
+            ephemeralStorageSize: Size.gibibytes(2),
+            retainOnDelete: false // Ensure the files are deleted with the bucket
+        });
 
         // Outputs
         new CfnOutput(this, 'SESEmailIdentity', {value: identity.emailIdentityName});
@@ -85,5 +131,15 @@ export class SwaStack extends Stack {
         new CfnOutput(this, 'LambdaDynamodbFunctionArn', {value: lambdaReadStream.functionArn});
         new CfnOutput(this, "ApiUrlOutput", {value: api.url});
         new CfnOutput(this, "EndpointOutput", {value: api.url + endpoint.path.replace("/", "")});
+        new CfnOutput(this, 'CloudFrontURL', {
+            value: distribution.domainName,
+            description: 'The distribution URL',
+            exportName: 'CloudfrontURL',
+        });
+        new CfnOutput(this, 'BucketName', {
+            value: frontendBucket.bucketName,
+            description: 'The name of the S3 bucket',
+            exportName: 'BucketName',
+        });
     }
 }
