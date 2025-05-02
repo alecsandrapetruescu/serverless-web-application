@@ -114,8 +114,8 @@ export class SwaStack extends Stack {
             ],
         });
 
-        new BucketDeployment(this, 'BucketDeployment', {
-            sources: [Source.asset(path.join(__dirname, '..','/src/ui/dist'))],
+        const bucketDeployment = new BucketDeployment(this, 'BucketDeployment', {
+            sources: [Source.asset(path.join(__dirname, '..','/src/ui/dist'), { exclude: ["appSettings.json"]})],
             destinationBucket: frontendBucket,
             distribution,
             distributionPaths: ['/*'],
@@ -123,6 +123,9 @@ export class SwaStack extends Stack {
             ephemeralStorageSize: Size.gibibytes(2),
             retainOnDelete: false // Ensure the files are deleted with the bucket
         });
+
+        const appSettings = { API : api.url }
+        bucketDeployment.addSource(Source.jsonData("appSettings.json", appSettings))
 
         // Outputs
         new CfnOutput(this, 'SESEmailIdentity', {value: identity.emailIdentityName});

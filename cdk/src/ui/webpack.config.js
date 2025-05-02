@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = (env) => {
     const isProduction = env.NODE_ENV === 'production';
@@ -35,6 +36,11 @@ module.exports = (env) => {
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV),
             }),
+            new CopyPlugin({
+                patterns: [
+                    { from: "appSettings.json", to: "appSettings.json" }
+                ],
+            })
         ]
     }
 };

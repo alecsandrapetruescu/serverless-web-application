@@ -102,7 +102,12 @@ You can view the X-Ray service map in the Amazon Cloudwatch console.
    ```
    SwaStack.CloudFrontURL = d3vrkgdyt1yawd.cloudfront.net
    ```
-
+8. Go to a browser and access `d3vrkgdyt1yawd.cloudfront.net`, it will display
+   ```
+   Hello, world!
+   Env API_URL = https://production.example.com
+   API Gateway URL = https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/
+   ```
 #### Cleanup
 
 Delete the stack
