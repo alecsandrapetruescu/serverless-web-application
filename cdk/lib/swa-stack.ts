@@ -43,10 +43,13 @@ export class SwaStack extends Stack {
             deployOptions: {
                 dataTraceEnabled: true,
                 tracingEnabled: true
-            },
-        })
+            }
+        });
 
         const endpoint = api.root.addResource("contact")
+        endpoint.addCorsPreflight({
+            allowOrigins: ['*'],
+        })
         const endpointMethod = endpoint.addMethod("POST", new apigateway.LambdaIntegration(lambdaApiGateway))
 
         const identity = new ses.EmailIdentity(this, 'Identity', {

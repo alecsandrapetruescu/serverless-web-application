@@ -80,13 +80,13 @@ You can view the X-Ray service map in the Amazon Cloudwatch console.
 
 1. Retrieve from the `cdk deploy` `Outputs` the API Gateway URL. It should look something like this
     ```
-    SwaStack.EndpointOutput = https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/contact
+    SwaStack.EndpointOutput = https://8ptakkuv9b.execute-api.eu-central-1.amazonaws.com/prod/contact
     ```
 2. To make the POST request to submit to Dynamodb table and SES, run:
     ```
     curl <your-restapi-endpoint>
     # example
-    curl -X POST https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/contact \
+    curl -X POST https://8ptakkuv9b.execute-api.eu-central-1.amazonaws.com/prod/contact \
    -H "Content-Type: application/json" \
    -d '{ "emailTo" : "emailTo", "subject" : "your subject", "message": "your message"}'  
     ```
@@ -103,11 +103,9 @@ You can view the X-Ray service map in the Amazon Cloudwatch console.
    SwaStack.CloudFrontURL = d3vrkgdyt1yawd.cloudfront.net
    ```
 8. Go to a browser and access `d3vrkgdyt1yawd.cloudfront.net`, it will display
-   ```
-   Hello, world!
-   Env API_URL = https://production.example.com
-   API Gateway URL = https://oi0pfit8c5.execute-api.eu-central-1.amazonaws.com/prod/
-   ```
+   ![contact-form.png](contact-form.png)
+9. Fill in the `Contact form` and click `Send`, a thank you for contacting us email will be sent to the filled in `Email address`
+
 #### Cleanup
 
 Delete the stack

@@ -23,7 +23,19 @@ module.exports = (env) => {
                     test: /\.(ts|tsx)$/,
                     exclude: /node_modules/,
                     use: 'babel-loader'
-                }
+                },
+                {
+                    test: /\.css$/i,
+                    use: ['style-loader', 'css-loader'],
+                },
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+                    type: 'asset/resource',
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                    type: 'asset/resource',
+                },
             ]
         },
         plugins: [
