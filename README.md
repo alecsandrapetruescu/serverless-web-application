@@ -45,7 +45,7 @@ export const SES_EMAIL_IDENTITY = "Please fill in your email to be used for crea
    ```
    {
     "UserId": "...",
-    "Account": "...", // <- should be copied for step 5.
+    "Account": "...", // <- should be copied for step 6.
     "Arn": "..."
    }
    ```
