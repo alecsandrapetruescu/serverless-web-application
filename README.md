@@ -1,5 +1,5 @@
 ## AWS Serverless web application
-[![Node.js CI [18.x]](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/node.js.yml/badge.svg)](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/node.js.yml)
+[![Node.js CI [22.x]](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/node.js.yml/badge.svg)](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/node.js.yml)
 [![CodeQL](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/codeql.yml/badge.svg)](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/codeql.yml)
 [![Dependency Review](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/alecsandrapetruescu/serverless-web-application/actions/workflows/dependency-review.yml)
 #### A high level overview of the services.
@@ -10,7 +10,7 @@
 - [Git](https://gist.github.com/alecsandrapetruescu/5aa99039842186ea8864d9ac10f73553)
 - [AWS CLI](https://gist.github.com/alecsandrapetruescu/78a17b5c2e530787fea25814f6ccbc53)
 - [Configure AWS CLI](README_AWSCLI_CONFIGURATION.md)
-- [Node.js version 18.x](https://gist.github.com/alecsandrapetruescu/9e5d1b02f2a9644b14257c101c8dd332)
+- [Node.js version 22.x](https://gist.github.com/alecsandrapetruescu/9e5d1b02f2a9644b14257c101c8dd332)
 - `cdk`: `npm install -g aws-cdk`
 - `AWS SES` uses an email address as identity, hardcoded in [env.ts](./cdk/env.ts)
 ```
