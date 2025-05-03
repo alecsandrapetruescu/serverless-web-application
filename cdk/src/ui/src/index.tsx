@@ -5,9 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 const api = process.env.API_URL;
-console.log(process.env.API_URL)
-
-
 const domNode = document.getElementById('root');
 const root = createRoot(domNode, {});
 
@@ -20,11 +17,12 @@ export default function App () {
         });
     }, [appSettings && appSettings.data]);
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [subject, setSubject] = useState('');
-    const [message, setMessage] = useState('');
-    let contact = { name: name, emailTo: email, subject: subject, message: message}
+    const [contact, setContact] = useState({
+        name: '',
+        emailTo: '',
+        subject: '',
+        message: ''
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -53,11 +51,18 @@ export default function App () {
         });
     }
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setContact({ ...contact, [name]: value });
+    };
+
     const resetForm = () => {
-        setName('');
-        setEmail('');
-        setSubject('');
-        setMessage('');
+        setContact({
+            name: '',
+            emailTo: '',
+            subject: '',
+            message: ''
+        });
     }
 
     return (
@@ -82,23 +87,25 @@ export default function App () {
                     <form id="contact-form" onSubmit={handleSubmit.bind(this)} method="POST">
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
-                            <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                            <input type="text" className="form-control" name="name"
+                                   value={contact.name} onChange={handleChange} required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input type="email" className="form-control" id="emailTo" aria-describedby="emailHelp"
-                                   value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                            <input type="email" className="form-control" name="emailTo" aria-describedby="emailHelp"
+                                   value={contact.emailTo} onChange={handleChange} required/>
                             <div id="emailHelp" className="form-text">We'll never share your email with anyone else.
                             </div>
                         </div>
                         <div className="form-group">
                             <label htmlFor="name">Subject</label>
-                            <input type="text" className="form-control" id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} required />
+                            <input type="text" className="form-control" name="subject"
+                                   value={contact.subject} onChange={handleChange} required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="message">Message</label>
-                            <textarea className="form-control" rows="5" id="message"
-                                      value={message} onChange={(e) => setMessage(e.target.value)} required />
+                            <textarea className="form-control" rows="5" name="message"
+                                      value={contact.message} onChange={handleChange} required />
                         </div>
                         <button type="submit" className="btn btn-primary mt-1">Submit</button>
                     </form>
